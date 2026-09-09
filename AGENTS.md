@@ -35,7 +35,7 @@ Unless the vault owner has enabled Obsidian Sync or git history of their own, ed
 - Note metadata lives in YAML frontmatter (Properties core plugin is on). Bases filter and display those properties, so keep property names consistent across notes meant to show up in the same base.
 - Daily notes are enabled with default settings: `YYYY-MM-DD.md` at the vault root.
 - The Natural Language Dates community plugin is installed (trigger `@`, output format `YYYY-MM-DD`). Write dates in that format so they match what the plugin inserts.
-- Banners plugin: give a note a cover image with `banner: "![[Attachments/image.jpg]]"` frontmatter. Banners render **only in reading view**, not in editing/Live Preview.
+- Pixel Banner plugin (id `pexels-banner`): give a note a cover image with `banner: "![[Attachments/image.jpg]]"` frontmatter; optional `banner-y` (0–100, default 60) sets the vertical crop position. The plugin supports many more `banner-*` properties and a GUI (flag icon on the note) — prefer the GUI's field names over inventing new ones.
 - Force note view mode plugin: `obsidianUIMode: preview` (or `source`) in frontmatter forces a note's view mode.
 
 ## `.obsidian/` config

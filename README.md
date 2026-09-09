@@ -57,7 +57,7 @@ No `gh`? See below.
 - **Statuses:** rename them in task frontmatter *and* in the `Tasks.base` view filters/`columnOrders` — the strings must match exactly.
 - **New views:** add them in the Bases UI or by editing the `.base` YAML; embed any view in a note with `![[Tasks.base#View Name]]`.
 - **Vault color:** the bundled `peacock.css` snippet extends your accent color (Settings → Appearance → Accent color) onto the window chrome — Peacock-style — so each vault built from this template is recognizable at a glance. Pick a different accent per vault; delete the snippet if you'd rather keep stock chrome.
-- **Banners & icons:** the Banners and Iconic plugins are included. Give any note a cover image with `banner: "![[Attachments/your-image.jpg]]"` frontmatter (renders in reading view), and set per-file icons via Iconic. Add `obsidianUIMode: preview` to make a note always open in reading view.
+- **Banners & icons:** the Pixel Banner and Iconic plugins are included. Give any note a cover image with `banner: "![[Attachments/your-image.jpg]]"` frontmatter or the banner-flag icon on the note (adjust the crop with `banner-y: 0–100`), and set per-file icons via Iconic. Add `obsidianUIMode: preview` to make a note always open in reading view.
 - **Dates:** type `@` for natural-language dates (`@tomorrow` → `2026-09-09`).
 
 ## Bundled community plugins
@@ -67,7 +67,7 @@ No `gh`? See below.
 | [Kanban Bases View](https://obsidian.md/plugins?id=kanban-bases-view) | Drag-and-drop kanban view for Bases |
 | [Columns](https://obsidian.md/plugins?id=obsidian-columns) | Side-by-side layout on the dashboard |
 | [Force note view mode](https://obsidian.md/plugins?id=obsidian-view-mode-by-frontmatter) | `obsidianUIMode` frontmatter → dashboard opens in reading view |
-| [Banners](https://obsidian.md/plugins?id=obsidian-banners) | Cover images via `banner` frontmatter |
+| [Pixel Banner](https://obsidian.md/plugins?id=pexels-banner) | Cover images via `banner` frontmatter or its banner-flag GUI |
 | [Iconic](https://obsidian.md/plugins?id=iconic) | Per-file/tab/folder icons |
 | [Natural Language Dates](https://obsidian.md/plugins?id=nldates-obsidian) | `@`-triggered date entry |
 | [Single Choice Property](https://obsidian.md/plugins?id=single-choice-property) | Keeps list properties to one value |
