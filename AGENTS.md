@@ -12,24 +12,26 @@ Unless the vault owner has enabled Obsidian Sync or git history of their own, ed
 
 - `Projects/<Note>.md` — one note per project (flat, no subfolders). Each ends with a `## Tasks` section embedding `![[Tasks.base#Project Tasks]]`.
 - `Tasks/<Note>.md` — one note per task, linked to its project via the `project` frontmatter property (a wikilink), **not** folder placement.
-- `Tasks/Archive/<Note>.md` — archived (typically `Done`/`Cancelled`) tasks, viewed through `TaskArchive.base`.
+- `Tasks/Archive/<Note>.md` — archived (`Finished`/`Cancelled`, never merely `Done`) tasks, viewed through `TaskArchive.base`.
+- `Projects/Archive/<Note>.md` — archived (`Finished`) projects, viewed through `ProjectArchive.base`.
 - `Attachments/` — images referenced by notes, saved here automatically (`app.json` → `attachmentFolderPath`).
 - `Templates/Task.md`, `Templates/Project.md` — starting frontmatter for new notes (Templates core plugin folder is `Templates/`).
-- `Projects.base`, `Tasks.base`, `TaskArchive.base` — the tracker's view/formula definitions.
+- `Projects.base`, `Tasks.base`, `TaskArchive.base`, `ProjectArchive.base` — the tracker's view/formula definitions.
 - `Dashboard.md` — home note embedding the key base views; forced into reading view via `obsidianUIMode: preview` frontmatter (Force note view mode plugin).
 - `.obsidian/` — app configuration (see below).
 
 ## Project & task tracker (Bases)
 
 - Task frontmatter: `status`, `project` (wikilink to the owning project note), `owner`, `tags`, `due`, plus optional `summary`.
-- **Task statuses** (exact strings — kanban columns and view filters depend on them): `Backlog`, `Up Next`, `In progress`, `Done`, `Cancelled`.
-- **Project statuses:** `Not started`, `In progress`, `Ongoing`, `Done`.
+- **Task statuses** (exact strings — kanban columns and view filters depend on them): `Backlog`, `Up Next`, `In progress`, `Done`, `Finished`, `Cancelled`.
+- **Project statuses:** `Not started`, `In progress`, `Ongoing`, `Done`, `Finished`.
+- **`Done` vs `Finished`:** `Done` means completed but deliberately still visible — it is the retrospective window (looking back at what got accomplished recently). `Finished` means retired: reviewed, no longer interesting day-to-day, and archive-eligible. Never treat them as synonyms or auto-promote `Done` to `Finished`.
 - Project frontmatter: `status`, `summary`, `latest`. Done/Total/Open/Progress % are **not** stored — `Projects.base` computes them live via formulas over `file.backlinks`, counting only tasks whose `project` property resolves back to that project note (not folder-based backlinks, since task bodies may link to other projects in prose).
 - `file.backlinks`-based formulas do not live-refresh reliably right after a bulk external write (e.g. a script creating/editing many notes outside the app). If `Projects.base` shows stale/undercounted numbers, fully quit and relaunch Obsidian to force a re-index rather than assuming the formula is wrong.
 - If you rename or add a status, update it everywhere at once: task frontmatter, `Tasks.base` view filters, and `columnOrders`. The strings must match exactly.
 - `due` has its property type set to `date` in `.obsidian/types.json`; keep it there so empty values don't fall back to plain text.
 - Tasks tagged `bug` surface in the dashboard's Bugs view.
-- **Archiving:** move a finished task's note into `Tasks/Archive/`, changing nothing else. `Tasks.base` filters on the exact parent folder (`file.folder == "Tasks"`), so the moved task drops out of every task view — kanban and the project notes' `## Tasks` embeds included — while its filename (and therefore its `project` wikilink and all inbound links) is unchanged, so `Projects.base`'s backlink-based counts still include it. `TaskArchive.base` mirrors the shape of `Tasks.base` over the archive folder; its `Project Tasks` view can be embedded in a project note (`![[TaskArchive.base#Project Tasks]]`) to show that project's archived tasks.
+- **Archiving:** once a task is `Finished` (or `Cancelled`), move its note into `Tasks/Archive/`, changing nothing else — `Done` tasks stay put until they've been retired. The bases filter on the exact parent folder (`file.folder == "Tasks"`), so the moved task drops out of every task view — kanban and the project notes' `## Tasks` embeds included — while its filename (and therefore its `project` wikilink and all inbound links) is unchanged, so `Projects.base`'s backlink-based counts still include it. `TaskArchive.base` mirrors the shape of `Tasks.base` over the archive folder; its `Project Tasks` view can be embedded in a project note (`![[TaskArchive.base#Project Tasks]]`) to show that project's archived tasks. Projects archive the same way: a `Finished` project's note moves to `Projects/Archive/` (viewed through `ProjectArchive.base`, which carries the same count formulas), normally together with archiving its remaining tasks.
 
 ## Obsidian conventions that apply here
 

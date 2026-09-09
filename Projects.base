@@ -4,8 +4,8 @@ filters:
 formulas:
   tasks: file.backlinks.filter(if(value.asFile().properties.project, value.asFile().properties.project.asFile().path == file.path, false))
   total_tasks: formula.tasks.length
-  done_tasks: formula.tasks.filter(value.asFile().properties.status == "Done").length
-  open_tasks: formula.tasks.filter(value.asFile().properties.status != "Done" && value.asFile().properties.status != "Cancelled").length
+  done_tasks: formula.tasks.filter(value.asFile().properties.status == "Done" || value.asFile().properties.status == "Finished").length
+  open_tasks: formula.tasks.filter(value.asFile().properties.status != "Done" && value.asFile().properties.status != "Finished" && value.asFile().properties.status != "Cancelled").length
   progress: if(formula.total_tasks > 0, (formula.done_tasks / formula.total_tasks * 100).round(1), "")
 properties:
   file.name:

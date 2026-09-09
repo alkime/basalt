@@ -1,0 +1,42 @@
+filters:
+  and:
+    - file.folder == "Projects/Archive"
+formulas:
+  tasks: file.backlinks.filter(if(value.asFile().properties.project, value.asFile().properties.project.asFile().path == file.path, false))
+  total_tasks: formula.tasks.length
+  done_tasks: formula.tasks.filter(value.asFile().properties.status == "Done" || value.asFile().properties.status == "Finished").length
+  open_tasks: formula.tasks.filter(value.asFile().properties.status != "Done" && value.asFile().properties.status != "Finished" && value.asFile().properties.status != "Cancelled").length
+  progress: if(formula.total_tasks > 0, (formula.done_tasks / formula.total_tasks * 100).round(1), "")
+properties:
+  file.name:
+    displayName: Project
+  note.status:
+    displayName: Status
+  formula.progress:
+    displayName: Progress %
+  formula.done_tasks:
+    displayName: Done
+  formula.total_tasks:
+    displayName: Total
+  formula.open_tasks:
+    displayName: Open
+  note.summary:
+    displayName: Summary
+  file.mtime:
+    displayName: Modified
+views:
+  - type: table
+    name: All
+    order:
+      - file.name
+      - status
+      - formula.progress
+      - formula.done_tasks
+      - formula.total_tasks
+      - formula.open_tasks
+      - file.mtime
+    sort:
+      - property: file.mtime
+        direction: DESC
+    columnSize:
+      file.name: 320

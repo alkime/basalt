@@ -40,6 +40,7 @@ views:
     filters:
       and:
         - status != "Done"
+        - status != "Finished"
         - status != "Cancelled"
     order:
       - project
@@ -146,8 +147,9 @@ views:
   - type: table
     name: Done
     filters:
-      and:
+      or:
         - status == "Done"
+        - status == "Finished"
     order:
       - file.name
       - project
