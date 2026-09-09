@@ -1,0 +1,159 @@
+filters:
+  and:
+    - file.folder == "Tasks"
+properties:
+  file.name:
+    displayName: Task
+  note.status:
+    displayName: Status
+  note.project:
+    displayName: Project
+  note.tags:
+    displayName: Tags
+  note.owner:
+    displayName: Owner
+  note.due:
+    displayName: Due
+  file.mtime:
+    displayName: Modified
+views:
+  - type: table
+    name: All
+    order:
+      - file.name
+      - status
+      - project
+      - tags
+      - owner
+      - due
+    sort:
+      - property: status
+        direction: DESC
+      - property: project
+        direction: ASC
+      - property: file.name
+        direction: ASC
+    columnSize:
+      file.name: 360
+  - type: kanban-view
+    name: Board
+    filters:
+      and:
+        - status != "Done"
+        - status != "Cancelled"
+    order:
+      - project
+    groupByProperty: note.status
+    quickAddFolder: Tasks
+    cardTitleProperty: file.name
+    columnOrders:
+      note.status:
+        - Up Next
+        - In progress
+        - Backlog
+    cardOrders:
+      note.status: {}
+    columnColors:
+      note.status: {}
+  - type: kanban-view
+    name: By Status (In Flight)
+    filters:
+      or:
+        - status == "Up Next"
+        - status == "In progress"
+        - status == "Done"
+    order:
+      - project
+    groupByProperty: note.status
+    quickAddFolder: Tasks
+    cardTitleProperty: file.name
+    columnOrders:
+      note.status:
+        - Up Next
+        - In progress
+        - Done
+    cardOrders:
+      note.status: {}
+    columnColors:
+      note.status: {}
+  - type: table
+    name: Up Next
+    filters:
+      and:
+        - status == "Up Next"
+    order:
+      - file.name
+      - project
+      - tags
+      - owner
+      - due
+    sort:
+      - property: file.name
+        direction: ASC
+      - property: project
+        direction: ASC
+    columnSize:
+      file.name: 360
+  - type: table
+    name: Bugs
+    filters:
+      and:
+        - file.hasTag("bug")
+    groupBy:
+      property: status
+      direction: ASC
+    order:
+      - file.name
+      - project
+      - owner
+      - file.mtime
+    sort:
+      - property: file.mtime
+        direction: DESC
+    columnSize:
+      file.name: 360
+  - type: table
+    name: Recently edited
+    order:
+      - file.name
+      - status
+      - project
+      - file.mtime
+    sort:
+      - property: file.mtime
+        direction: DESC
+    limit: 20
+    columnSize:
+      file.name: 360
+  - type: table
+    name: Project Tasks
+    filters:
+      and:
+        - if(project, project.asFile().path == this.file.path, false)
+    order:
+      - file.name
+      - status
+      - tags
+      - owner
+      - due
+    sort:
+      - property: status
+        direction: ASC
+      - property: file.name
+        direction: ASC
+    columnSize:
+      file.name: 360
+  - type: table
+    name: Done
+    filters:
+      and:
+        - status == "Done"
+    order:
+      - file.name
+      - project
+      - file.mtime
+    sort:
+      - property: file.mtime
+        direction: DESC
+    columnSize:
+      file.name: 360

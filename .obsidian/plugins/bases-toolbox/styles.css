@@ -1,0 +1,1752 @@
+/* Embedded-base display flags (written as embed alt text):
+   ![[My Base.base|bases-no-toolbar]] hides the toolbar row,
+   ![[My Base.base|bases-no-header]] hides the whole header. */
+.bases-embed[alt~="bases-no-toolbar"] .bases-toolbar {
+  display: none;
+}
+
+.bases-embed[alt~="bases-no-header"] .bases-header {
+  display: none;
+}
+
+/* Multiline list cells: stack list-property pills vertically in Bases tables.
+   Rows are virtualized with a fixed height (inline top offsets computed in JS),
+   so per-row auto-height is off the table; instead the stacked list scrolls
+   within the cell, and Bases' native row-height option provides taller rows. */
+body.bases-toolbox-multiline-lists .bases-table-cell .multi-select-container {
+  flex-direction: column;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  /* the container otherwise shrinks to fit and clips the pills */
+  width: 100%;
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+/* CSV import modal */
+.bases-toolbox-csv-modal {
+  width: var(--modal-width);
+  max-width: 900px;
+}
+
+.bases-toolbox-csv-input {
+  width: 100%;
+  min-height: 6em;
+  resize: vertical;
+  font-family: var(--font-monospace);
+  font-size: var(--font-ui-small);
+}
+
+.bases-toolbox-csv-table {
+  width: 100%;
+  margin: var(--size-4-2) 0;
+  border-collapse: collapse;
+}
+
+.bases-toolbox-csv-table th,
+.bases-toolbox-csv-table td {
+  border-bottom: 1px solid var(--background-modifier-border);
+  padding: var(--size-2-1) var(--size-2-2);
+  text-align: left;
+  font-size: var(--font-ui-small);
+}
+
+.bases-toolbox-csv-table input[type="text"] {
+  width: 100%;
+}
+
+/* Allowed-values picker */
+.bases-toolbox-picker {
+  position: fixed;
+  z-index: var(--layer-menu);
+  background: var(--background-primary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-m);
+  box-shadow: var(--shadow-s);
+  max-height: 240px;
+  overflow-y: auto;
+  min-width: 140px;
+}
+
+.bases-toolbox-picker-item {
+  padding: var(--size-2-1) var(--size-4-2);
+  cursor: pointer;
+  font-size: var(--font-ui-small);
+}
+
+.bases-toolbox-picker-item:hover {
+  background: var(--background-modifier-hover);
+}
+
+/* Enabled (pinned) properties get the accent color so they're obvious in the
+ * index; the `.bases-toolbox-index-btn` prefix matches the violation rule's
+ * specificity so it isn't overridden by the muted default icon color. */
+.bases-toolbox-index-btn.bases-toolbox-pin-active,
+.bases-toolbox-index-btn.bases-toolbox-pin-active:hover {
+  color: var(--interactive-accent);
+}
+/* Forced warning red (NOT the user accent), legible in both themes, so a pin
+ * with out-of-list values reads as a problem regardless of the theme accent. */
+.bases-toolbox-index-btn.bases-toolbox-pin-violation,
+.bases-toolbox-index-btn.bases-toolbox-pin-violation:hover {
+  color: var(--color-red, #e5484d) !important;
+}
+
+.bases-toolbox-pin-list {
+  max-height: 240px;
+  overflow-y: auto;
+  margin-bottom: var(--size-4-2);
+}
+
+/* Duplicate finder */
+.bases-toolbox-dup-group {
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-m);
+  padding: var(--size-4-2);
+  margin: var(--size-4-2) 0;
+}
+
+.bases-toolbox-dup-key {
+  font-weight: var(--font-medium);
+  font-size: var(--font-ui-small);
+  margin-bottom: var(--size-2-2);
+}
+
+.bases-toolbox-dup-keyrow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--size-4-2);
+}
+
+.bases-toolbox-dup-keyrow .bases-toolbox-dup-key {
+  margin-bottom: 0;
+}
+
+.bases-toolbox-dup-ignore-btn {
+  flex: 0 0 auto;
+  font-size: var(--font-ui-smaller);
+  padding: var(--size-2-1) var(--size-2-3);
+}
+
+/* Success state for an action button: the button itself confirms the result. */
+.bases-toolbox-btn-success,
+.bases-toolbox-btn-success:disabled {
+  background-color: var(--color-green);
+  color: var(--text-on-accent);
+  opacity: 1;
+}
+
+.bases-toolbox-frv-force-help {
+  margin-top: var(--size-2-1);
+  font-size: var(--font-ui-smaller);
+  color: var(--text-faint);
+}
+
+.bases-toolbox-builtin-id {
+  font-family: var(--font-monospace);
+  color: var(--text-accent);
+  cursor: pointer;
+  margin-right: var(--size-2-2);
+}
+
+.bases-toolbox-builtin-id:hover {
+  text-decoration: underline;
+}
+
+.bases-toolbox-history-risk {
+  display: flex;
+  align-items: baseline;
+  gap: var(--size-2-1);
+  margin: var(--size-2-1) 0 var(--size-2-2);
+  color: var(--text-error);
+  font-size: var(--font-ui-smaller);
+  font-weight: var(--font-medium);
+  overflow-wrap: anywhere;
+}
+
+.bases-toolbox-history-risk-icon {
+  display: inline-flex;
+}
+
+.bases-toolbox-history-risk-icon .svg-icon {
+  width: var(--icon-s);
+  height: var(--icon-s);
+}
+
+.bases-toolbox-history-skipped {
+  margin-top: var(--size-4-2);
+  padding: var(--size-2-3);
+  border-left: 3px solid var(--color-orange);
+  background: var(--background-secondary);
+  border-radius: var(--radius-s);
+}
+
+.bases-toolbox-dup-row {
+  display: flex;
+  align-items: center;
+  gap: var(--size-2-2);
+  padding: var(--size-2-1) 0;
+}
+
+.bases-toolbox-dup-view {
+  overflow-y: auto;
+}
+
+.bases-toolbox-csv-view {
+  overflow-y: auto;
+}
+
+.bases-toolbox-csv-view-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--size-4-4) var(--size-4-3);
+  container-type: inline-size;
+}
+
+/* Give the folder/base text inputs the majority of the row so the hint and the
+   typed path are readable (they're the whole point of these fields). */
+.bases-toolbox-csv-view-inner .setting-item-control,
+.bases-toolbox-csv-modal .setting-item-control {
+  flex: 1 1 60%;
+  justify-content: flex-start;
+}
+.bases-toolbox-csv-view-inner .setting-item-control input[type="text"],
+.bases-toolbox-csv-modal .setting-item-control input[type="text"] {
+  width: 100%;
+}
+.bases-toolbox-csv-view-inner .setting-item-info,
+.bases-toolbox-csv-modal .setting-item-info {
+  flex: 0 1 40%;
+}
+
+/* In a narrow pane (sidebar), stack each Setting so the label isn't crushed to
+   one character per line — the control drops below and fills the width. */
+@container (max-width: 420px) {
+  .bases-toolbox-csv-view-inner .setting-item {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--size-2-2);
+  }
+  .bases-toolbox-csv-view-inner .setting-item-info {
+    margin-right: 0;
+  }
+  .bases-toolbox-csv-view-inner .setting-item-control {
+    justify-content: flex-start;
+  }
+  .bases-toolbox-csv-view-inner .setting-item-control input[type="text"],
+  .bases-toolbox-csv-view-inner .setting-item-control textarea {
+    width: 100%;
+  }
+}
+
+.bases-toolbox-export-table-wrap {
+  overflow: auto;
+  max-height: 340px;
+  margin: var(--size-2-3) 0;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-s);
+}
+
+.bases-toolbox-export-table {
+  border-collapse: collapse;
+  font-size: var(--font-ui-smaller);
+}
+
+.bases-toolbox-export-table th,
+.bases-toolbox-export-table td {
+  padding: var(--size-2-1) var(--size-2-3);
+  border-bottom: 1px solid var(--background-modifier-border);
+  text-align: left;
+  white-space: nowrap;
+  max-width: 220px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bases-toolbox-export-table th {
+  position: sticky;
+  top: 0;
+  background: var(--background-secondary);
+  color: var(--text-muted);
+}
+
+.bases-toolbox-export-viewcard {
+  margin: var(--size-2-3) 0;
+  padding: var(--size-2-3);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-s);
+  background: var(--background-secondary);
+}
+
+.bases-toolbox-export-viewname {
+  font-weight: var(--font-medium);
+  margin-bottom: var(--size-2-2);
+}
+
+.bases-toolbox-export-ignore,
+.bases-toolbox-export-nonmd-list {
+  max-height: 200px;
+  overflow-y: auto;
+  margin: var(--size-2-2) 0;
+  padding: var(--size-2-2) var(--size-2-3);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-s);
+}
+
+.bases-toolbox-export-nonmd-item {
+  font-size: var(--font-ui-smaller);
+  color: var(--text-muted);
+  overflow-wrap: anywhere;
+  padding: var(--size-2-1) 0;
+}
+
+.bases-toolbox-export-nonmd-note {
+  color: var(--text-warning);
+}
+
+.bases-toolbox-export-cols {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--size-2-2) var(--size-4-2);
+  margin: var(--size-2-2) 0;
+}
+
+.bases-toolbox-export-col {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--size-2-1);
+  font-size: var(--font-ui-smaller);
+  cursor: pointer;
+}
+
+.bases-toolbox-csv-drop {
+  margin: var(--size-2-3) 0;
+  padding: var(--size-4-4) var(--size-4-3);
+  border: 1.5px dashed var(--background-modifier-border);
+  border-radius: var(--radius-m);
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.12s, border-color 0.12s;
+}
+
+.bases-toolbox-csv-drop:hover,
+.bases-toolbox-csv-drop.is-dragover {
+  border-color: var(--interactive-accent);
+  background: var(--background-modifier-hover);
+}
+
+.bases-toolbox-csv-drop-main {
+  font-weight: var(--font-medium);
+}
+
+.bases-toolbox-csv-drop-sub {
+  margin-top: var(--size-2-2);
+  font-size: var(--font-ui-smaller);
+  color: var(--text-muted);
+}
+
+.bases-toolbox-export-limits {
+  padding-left: var(--size-2-3);
+  border-left: 3px solid var(--background-modifier-border);
+  font-size: var(--font-ui-smaller);
+}
+
+/* Properties modal (roomy edit/create form) */
+.bases-toolbox-props-modal {
+  width: var(--modal-width);
+  max-width: 720px;
+}
+
+.bases-toolbox-props-heading {
+  font-weight: var(--font-medium);
+  margin: var(--size-4-3) 0 var(--size-2-2);
+}
+
+.bases-toolbox-props-rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-2-2);
+}
+
+.bases-toolbox-props-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--size-2-2);
+}
+
+.bases-toolbox-props-key {
+  flex: 0 0 30%;
+  min-width: 0;
+}
+
+.bases-toolbox-props-type {
+  flex: 0 0 auto;
+}
+
+.bases-toolbox-props-val {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.bases-toolbox-props-check {
+  align-self: center;
+  margin: var(--size-2-1) auto;
+}
+
+/* Rename prompt: the single input should span the whole modal width. */
+.bases-toolbox-prompt-modal .setting-item {
+  border: none;
+  padding: var(--size-2-2) 0;
+}
+.bases-toolbox-prompt-modal .setting-item-info {
+  display: none;
+}
+.bases-toolbox-prompt-modal .setting-item-control {
+  flex: 1 1 auto;
+  justify-content: flex-start;
+}
+.bases-toolbox-prompt-modal .setting-item-control input[type="text"] {
+  width: 100%;
+}
+
+.bases-toolbox-props-link,
+.bases-toolbox-props-del {
+  flex: 0 0 auto;
+  padding: var(--size-2-1) var(--size-2-2);
+}
+
+.bases-toolbox-csv-section {
+  margin-bottom: var(--size-4-6);
+}
+
+.bases-toolbox-csv-heading {
+  display: flex;
+  align-items: center;
+  gap: var(--size-2-2);
+  font-size: var(--font-ui-medium);
+  font-weight: var(--font-medium);
+  margin-bottom: var(--size-2-3);
+  padding-bottom: var(--size-2-2);
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.bases-toolbox-csv-heading-icon {
+  display: inline-flex;
+  color: var(--text-muted);
+}
+
+.bases-toolbox-dup-view-inner {
+  /* Was 720px — cramped the whole finder into a centered column. Wide enough
+     now for paths + metadata + diffs to breathe; the margin still centers it
+     on very wide panes so lines don't run unreadably long. */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--size-4-4) var(--size-4-3);
+}
+
+.bases-toolbox-dup-link {
+  flex: 1 1 auto;
+  min-width: 0;
+  color: var(--text-accent);
+  cursor: pointer;
+  text-decoration: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bases-toolbox-dup-link:hover {
+  text-decoration: underline;
+}
+
+.bases-toolbox-dup-preview {
+  margin: var(--size-2-3) 0;
+  padding: var(--size-4-2);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-m);
+  background: var(--background-secondary);
+}
+
+.bases-toolbox-dup-preview-head {
+  font-size: var(--font-ui-smaller);
+  color: var(--text-muted);
+  margin-bottom: var(--size-2-2);
+}
+
+.bases-toolbox-dup-pv-table {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-2-1);
+}
+
+.bases-toolbox-dup-pv-row {
+  display: grid;
+  grid-template-columns: minmax(80px, 0.6fr) minmax(0, 1fr) minmax(90px, 0.9fr);
+  gap: var(--size-4-2);
+  align-items: baseline;
+  padding: var(--size-2-1) var(--size-2-2);
+  border-radius: var(--radius-s);
+  font-size: var(--font-ui-smaller);
+  border-left: 3px solid transparent;
+}
+
+.bases-toolbox-dup-pv-row .bt-pv-key {
+  font-weight: var(--font-medium);
+  overflow-wrap: anywhere;
+}
+
+.bases-toolbox-dup-pv-row .bt-pv-val {
+  font-family: var(--font-monospace);
+  overflow-wrap: anywhere;
+}
+
+.bases-toolbox-dup-pv-row .bt-pv-origin {
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+  text-align: right;
+}
+
+.bases-toolbox-dup-pv-row.bt-origin-added {
+  border-left-color: var(--color-green);
+}
+.bases-toolbox-dup-pv-row.bt-origin-union {
+  border-left-color: var(--color-blue);
+}
+.bases-toolbox-dup-pv-row.bt-origin-conflict {
+  border-left-color: var(--color-orange);
+}
+
+.bases-toolbox-dup-pv-foot {
+  margin-top: var(--size-2-2);
+  font-size: var(--font-ui-smaller);
+  color: var(--text-muted);
+}
+
+.bases-toolbox-dup-pv-trash {
+  color: var(--text-error);
+}
+
+.bases-toolbox-dup-pv-kept {
+  font-weight: var(--font-medium);
+  color: var(--text-normal);
+}
+
+.bases-toolbox-dup-pv-arrow {
+  color: var(--text-faint);
+}
+
+.bases-toolbox-dup-pv-warn {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--size-2-2);
+  color: var(--text-warning);
+}
+
+.bases-toolbox-dup-pv-warn .bases-toolbox-fr-warn-icon {
+  flex: 0 0 auto;
+  display: inline-flex;
+}
+
+.bases-toolbox-csv-preview {
+  background: var(--background-secondary);
+  border-radius: var(--radius-m);
+  padding: var(--size-4-2);
+  font-size: var(--font-ui-smaller);
+  max-height: 220px;
+  overflow: auto;
+}
+
+.bases-toolbox-csv-preview-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--size-2-2);
+  margin-top: var(--size-4-2);
+}
+
+/* Cell zoom modal */
+.bases-toolbox-zoom-textarea {
+  width: 100%;
+  min-height: 12em;
+  resize: vertical;
+  font-family: var(--font-text);
+}
+
+/* Format doctor */
+.bases-toolbox-doctor-input {
+  flex: 1;
+  min-width: 140px;
+}
+
+input.bases-toolbox-doctor-input.bases-toolbox-doctor-invalid {
+  border-color: var(--text-error);
+  box-shadow: 0 0 0 1px var(--text-error);
+}
+
+.bases-toolbox-doctor-row {
+  padding: var(--size-4-2) 0;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+.bases-toolbox-doctor-rowhead {
+  display: flex;
+  align-items: center;
+  gap: var(--size-2-2);
+  margin-bottom: var(--size-2-2);
+}
+.bases-toolbox-doctor-grid {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: var(--size-2-1) var(--size-4-2);
+  align-items: center;
+}
+.bases-toolbox-doctor-lbl {
+  color: var(--text-faint);
+  font-size: var(--font-ui-smaller);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+.bases-toolbox-doctor-val,
+.bases-toolbox-doctor-out {
+  font-family: var(--font-monospace);
+  font-size: var(--font-ui-smaller);
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 6em;
+  overflow-y: auto;
+}
+.bases-toolbox-doctor-out-bad {
+  color: var(--text-error);
+}
+
+/* Find & replace tab view */
+.bases-toolbox-frv-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--size-2-3);
+  flex-wrap: wrap;
+  margin: var(--size-4-2) 0;
+  font-size: var(--font-ui-small);
+}
+
+.bases-toolbox-frv-bar input[type="text"] {
+  flex: 1;
+  min-width: 160px;
+}
+
+.bases-toolbox-frv-list {
+  border-top: 1px solid var(--background-modifier-border);
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.bases-toolbox-frv-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: var(--size-2-3);
+  row-gap: var(--size-2-1);
+  padding: var(--size-2-2) 0;
+  border-bottom: 1px solid var(--background-modifier-border);
+  font-size: var(--font-ui-small);
+}
+
+/* Long paths/changes wrap instead of colliding with the text on the right. */
+.bases-toolbox-frv-path {
+  flex: 1 1 55%;
+  min-width: 0;
+  color: var(--text-accent);
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+
+.bases-toolbox-frv-diff {
+  flex: 1 1 auto;
+  margin-left: auto;
+  min-width: 0;
+  color: var(--text-muted);
+  overflow-wrap: anywhere;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Find & replace modal */
+.bases-toolbox-fr-info {
+  color: var(--text-muted);
+  font-size: var(--font-ui-small);
+  margin-bottom: var(--size-4-2);
+}
+
+/* View manager — one row per view (name + badges + actions). */
+.bases-toolbox-vm-list {
+  margin-bottom: var(--size-4-3);
+}
+.bases-toolbox-vm-row {
+  display: flex;
+  align-items: center;
+  gap: var(--size-4-2);
+  padding: var(--size-4-2) 0;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+.bases-toolbox-vm-row:last-child {
+  border-bottom: none;
+}
+.bases-toolbox-vm-name {
+  flex: 1;
+  min-width: 6em;
+}
+.bases-toolbox-vm-badges {
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+  white-space: nowrap;
+}
+.bases-toolbox-vm-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--size-2-2);
+  flex-shrink: 0;
+}
+/* The extra-button wrapper adds its own margins; keep the row tight. */
+.bases-toolbox-vm-actions .clickable-icon {
+  margin: 0;
+}
+
+/* View manager — toolbar button, sits after the base's view switcher. */
+.bases-toolbar-item.bases-toolbox-vm-toolbar-btn {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Column manager — one row per column (id + kind + actions). */
+.bases-toolbox-cm-search {
+  width: 100%;
+  margin-bottom: var(--size-4-2);
+}
+.bases-toolbox-cm-list {
+  margin-bottom: var(--size-4-3);
+}
+.bases-toolbox-cm-row {
+  display: flex;
+  align-items: center;
+  gap: var(--size-4-2);
+  padding: var(--size-4-1) 0;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+.bases-toolbox-cm-row:last-child {
+  border-bottom: none;
+}
+.bases-toolbox-cm-name {
+  flex: 1;
+  min-width: 6em;
+  overflow-wrap: anywhere;
+}
+.bases-toolbox-cm-badges {
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+  white-space: nowrap;
+}
+.bases-toolbox-cm-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--size-2-2);
+  flex-shrink: 0;
+}
+.bases-toolbox-cm-actions .clickable-icon {
+  margin: 0;
+}
+.bases-toolbox-cm-implicit {
+  color: var(--text-warning);
+}
+
+/* Column manager — toolbar button, sits after the view manager's button. */
+.bases-toolbar-item.bases-toolbox-cm-toolbar-btn {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* "Jump to column" flash — brief highlight so the eye lands after the scroll.
+   Theme vars only, so it reads in both light and dark. */
+.bases-toolbox-cm-flash {
+  animation: bases-toolbox-cm-flash 1.2s ease-out;
+}
+@keyframes bases-toolbox-cm-flash {
+  0%,
+  60% {
+    background-color: var(--text-selection);
+    box-shadow: inset 0 -2px 0 var(--interactive-accent);
+  }
+  100% {
+    background-color: transparent;
+    box-shadow: none;
+  }
+}
+
+/* Duplicate finder — per-folder scope rows (include / exclude lists). */
+.bases-toolbox-fr-folder-row {
+  gap: var(--size-4-2);
+}
+.bases-toolbox-fr-folder-row input[type="text"] {
+  flex: 1;
+  min-width: 8em;
+}
+.bases-toolbox-fr-folder-lbl {
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+}
+
+/* Duplicate finder — post-scan results folder filter chips. */
+.bases-toolbox-fr-folderfilter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--size-4-2);
+  margin-bottom: var(--size-4-3);
+}
+.bases-toolbox-fr-folderfilter-lbl {
+  color: var(--text-muted);
+  font-size: var(--font-ui-small);
+}
+.bases-toolbox-fr-folderchip {
+  cursor: pointer;
+  padding: 2px var(--size-4-2);
+  border-radius: var(--radius-s);
+  background: var(--background-modifier-hover);
+  color: var(--text-normal);
+  font-size: var(--font-ui-smaller);
+  border: 1px solid var(--background-modifier-border);
+  user-select: none;
+}
+.bases-toolbox-fr-folderchip.is-off {
+  opacity: 0.5;
+  text-decoration: line-through;
+  background: transparent;
+}
+
+.bases-toolbox-fr-warning {
+  color: var(--text-warning);
+  font-size: var(--font-ui-small);
+  margin-bottom: var(--size-4-2);
+}
+
+.bases-toolbox-history-reverted {
+  color: var(--text-faint);
+  font-size: var(--font-ui-smaller);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-s);
+  padding: 0 var(--size-2-1);
+}
+
+/* Property index view */
+.bases-toolbox-index-search {
+  width: 100%;
+  margin-bottom: var(--size-4-2);
+}
+
+.bases-toolbox-index-prop {
+  border-bottom: 1px solid var(--background-modifier-border);
+  padding: var(--size-2-2) 0;
+}
+
+.bases-toolbox-index-prop-header {
+  display: flex;
+  align-items: center;
+  gap: var(--size-2-2);
+  cursor: pointer;
+}
+
+.bases-toolbox-index-prop-name {
+  font-weight: var(--font-medium);
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bases-toolbox-index-prop-type {
+  color: var(--text-faint);
+  font-size: var(--font-ui-smaller);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-s);
+  padding: 0 var(--size-2-1);
+}
+
+.bases-toolbox-index-prop-count {
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+  font-variant-numeric: tabular-nums;
+}
+
+.bases-toolbox-index-btn {
+  display: inline-flex;
+  padding: var(--size-2-1);
+}
+
+.bases-toolbox-index-values {
+  margin-top: var(--size-2-2);
+  padding-left: var(--size-4-2);
+}
+
+.bases-toolbox-index-value {
+  display: flex;
+  align-items: center;
+  gap: var(--size-2-2);
+  padding: var(--size-2-1) 0;
+}
+
+.bases-toolbox-index-value-text {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--font-ui-small);
+}
+
+.bases-toolbox-index-empty {
+  color: var(--text-faint);
+  font-size: var(--font-ui-small);
+  padding: var(--size-2-2) 0;
+}
+
+/* Settings deep-link flash */
+.bases-toolbox-flash {
+  animation: bases-toolbox-flash-kf 1.6s ease-out;
+  border-radius: var(--radius-m);
+}
+@keyframes bases-toolbox-flash-kf {
+  0%, 40% { background-color: var(--text-selection); }
+  100% { background-color: transparent; }
+}
+
+/* Conditional formatting rules editor */
+.bases-toolbox-cf-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-2-2);
+  margin-bottom: var(--size-4-2);
+}
+.bases-toolbox-cf-rule {
+  display: flex;
+  align-items: center;
+  gap: var(--size-2-2);
+  flex-wrap: wrap;
+}
+.bases-toolbox-cf-swatch {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--background-modifier-border);
+}
+.bases-toolbox-cf-prop,
+.bases-toolbox-cf-val {
+  width: 96px;
+}
+.bases-toolbox-cf-rule .bases-toolbox-cf-name {
+  width: 96px;
+}
+.bases-toolbox-cf-scope-search {
+  width: 100%;
+  margin: var(--size-2-3) 0;
+}
+.bases-toolbox-cf-scope-folder {
+  font-size: var(--font-ui-smaller);
+  font-weight: var(--font-semibold);
+  color: var(--text-muted);
+  margin: var(--size-2-2) 0 var(--size-2-1);
+}
+.bases-toolbox-cf-rule select,
+.bases-toolbox-cf-add select {
+  height: auto;
+  min-height: unset;
+  /* size the dropdown to its selected text, not a fixed wide box */
+  width: auto;
+  min-width: unset;
+  field-sizing: content;
+}
+.bases-toolbox-cf-grip {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  cursor: grab;
+  color: var(--text-faint);
+}
+.bases-toolbox-cf-grip:hover { color: var(--text-muted); }
+.bases-toolbox-cf-grip:active { cursor: grabbing; }
+.bases-toolbox-cf-grip svg { width: 14px; height: 14px; }
+/* The row being dragged fades; the drop target shows an accent edge on the side
+   the dragged row will land. */
+.bases-toolbox-cf-dragging { opacity: 0.4; }
+.bases-toolbox-cf-drop-before { box-shadow: 0 -2px 0 0 var(--interactive-accent); }
+.bases-toolbox-cf-drop-after { box-shadow: 0 2px 0 0 var(--interactive-accent); }
+/* Up/down stacked vertically on the left of each CF rule row. */
+.bases-toolbox-cf-reorder {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 auto;
+}
+.bases-toolbox-cf-reorder .bases-toolbox-cf-btn {
+  padding: 0;
+  height: 15px;
+  width: 18px;
+}
+.bases-toolbox-cf-reorder .bases-toolbox-cf-btn svg {
+  width: 13px;
+  height: 13px;
+}
+/* Trash pinned to the right end of the row. In the settings row (no flex-grow
+   child) margin-left:auto pushes it right; in the sidebar card the flex:1
+   summary already does, so this is a harmless no-op there. */
+.bases-toolbox-cf-trash {
+  margin-left: auto;
+}
+.bases-toolbox-cf-btn {
+  padding: var(--size-2-1);
+}
+.bases-toolbox-cf-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+/* Native color input: explicit box so the swatch is not clipped top/bottom */
+.bases-toolbox-color-input {
+  width: 34px;
+  height: 24px;
+  padding: 0;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-s);
+  background: none;
+  cursor: pointer;
+  box-sizing: border-box;
+  flex: 0 0 auto;
+}
+.bases-toolbox-color-input::-webkit-color-swatch-wrapper { padding: 2px; }
+.bases-toolbox-color-input::-webkit-color-swatch { border: none; border-radius: 2px; }
+
+.bases-toolbox-cf-add {
+  margin-top: var(--size-4-2);
+  padding-top: var(--size-4-2);
+  border-top: 1px solid var(--background-modifier-border);
+}
+.bases-toolbox-cf-addlabel {
+  flex: 0 0 auto;
+  font-weight: var(--font-medium);
+  white-space: nowrap;
+}
+
+.bases-toolbox-index-files {
+  padding-left: var(--size-4-4);
+}
+.bases-toolbox-index-file {
+  display: flex;
+  align-items: center;
+  gap: var(--size-2-1);
+  padding: var(--size-2-1) 0;
+  font-size: var(--font-ui-smaller);
+}
+.bases-toolbox-index-file-link {
+  color: var(--text-accent);
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.bases-toolbox-index-file-link:hover {
+  text-decoration: underline;
+}
+
+.bases-toolbox-index-toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--size-2-2);
+  margin-bottom: var(--size-4-2);
+}
+.bases-toolbox-index-toolbar .bases-toolbox-index-search {
+  flex: 1;
+  margin-bottom: 0;
+}
+.bases-toolbox-hidden {
+  display: none !important;
+}
+/* Pinned-values violation toast: message on top, action button below-left. */
+.bases-toolbox-pin-notice {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--size-4-2);
+}
+.bases-toolbox-pin-notice button {
+  margin: 0;
+}
+.bases-toolbox-index-twisty {
+  display: inline-flex;
+  align-items: center;
+  color: var(--text-muted);
+  flex: 0 0 auto;
+}
+.bases-toolbox-index-twisty svg {
+  width: var(--icon-s, 16px);
+  height: var(--icon-s, 16px);
+}
+
+.bases-toolbox-frv-force {
+  display: flex;
+  align-items: center;
+  gap: var(--size-2-1);
+  margin-bottom: var(--size-4-2);
+}
+
+.bases-toolbox-cf-sheets {
+  font-size: var(--font-ui-smaller);
+  padding: var(--size-2-1) var(--size-2-3);
+}
+
+/* Extension chips (companion settings) */
+.bases-toolbox-chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--size-2-2);
+  padding: var(--size-2-2) 0 var(--size-4-2) 0;
+}
+.bases-toolbox-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--size-2-1);
+  padding: var(--size-2-1) var(--size-2-3);
+  border-radius: var(--radius-l);
+  background-color: var(--background-modifier-hover);
+  font-size: var(--font-ui-small);
+  cursor: pointer;
+  user-select: none;
+}
+.bases-toolbox-chip:hover { background-color: var(--background-modifier-active-hover); }
+.bases-toolbox-chip-muted {
+  background-color: transparent;
+  border: 1px dashed var(--background-modifier-border-hover);
+  color: var(--text-muted);
+}
+.bases-toolbox-chip-icon { display: inline-flex; align-items: center; }
+.bases-toolbox-chip-icon svg { width: var(--font-ui-small); height: var(--font-ui-small); }
+.bases-toolbox-chips-empty { font-size: var(--font-ui-small); color: var(--text-muted); }
+
+/* Conditional formatting panel (narrow-friendly cards) */
+.bases-toolbox-cfview { padding: var(--size-4-2); }
+.bases-toolbox-cfcard {
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-m);
+  padding: var(--size-2-3);
+  margin-bottom: var(--size-2-3);
+}
+.bases-toolbox-cfcard-head {
+  display: flex;
+  align-items: center;
+  gap: var(--size-2-2);
+  margin-bottom: var(--size-2-2);
+}
+.bases-toolbox-cfcard-summary {
+  flex: 1;
+  font-weight: var(--font-medium);
+  font-size: var(--font-ui-small);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.bases-toolbox-cfcard-body { display: flex; flex-direction: column; gap: var(--size-2-2); }
+.bases-toolbox-cfcard-body input[type=text] { width: 100%; }
+.bases-toolbox-cfcard-row { display: flex; gap: var(--size-2-2); align-items: center; }
+.bases-toolbox-cfcard-row select { flex: 1; }
+.bases-toolbox-cfcard-row input[type=text] { flex: 1; }
+.bases-toolbox-cfcard-add { border-style: dashed; }
+
+/* Duplicate-condition flag (settings rows and panel cards) */
+.bases-toolbox-cf-dup {
+  border-left: 3px solid var(--color-orange);
+  background: rgba(var(--color-orange-rgb), 0.06);
+}
+.bases-toolbox-cf-dup::after {
+  content: "duplicate";
+  font-size: var(--font-ui-smaller);
+  color: var(--color-orange);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-left: auto;
+  padding-left: var(--size-2-2);
+  align-self: center;
+}
+
+/* In-settings feature reference */
+.bases-toolbox-ref {
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-m);
+  padding: var(--size-2-3) var(--size-4-2);
+  margin-bottom: var(--size-4-4);
+}
+.bases-toolbox-ref > summary {
+  cursor: pointer;
+  font-weight: var(--font-medium);
+  color: var(--text-normal);
+}
+.bases-toolbox-ref-group {
+  font-weight: var(--font-semibold);
+  color: var(--text-normal);
+  margin: var(--size-4-3) 0 var(--size-2-1);
+}
+.bases-toolbox-ref-note {
+  font-size: var(--font-ui-smaller);
+  color: var(--text-muted);
+  margin-bottom: var(--size-2-2);
+}
+.bases-toolbox-ref-list { display: flex; flex-direction: column; gap: var(--size-2-1); }
+.bases-toolbox-ref-item {
+  font-size: var(--font-ui-small);
+  color: var(--text-muted);
+  line-height: var(--line-height-tight);
+}
+.bases-toolbox-ref-item strong { color: var(--text-normal); }
+
+/* Property Index — delete + open-all + export UI */
+.bases-toolbox-index-del:hover { color: var(--text-error); }
+.bases-toolbox-del-open {
+  margin-top: var(--size-2-2);
+  padding: 2px 10px;
+  border-radius: var(--radius-s);
+  background: var(--interactive-accent);
+  color: var(--text-on-accent);
+  font-size: var(--font-ui-smaller);
+  cursor: pointer;
+  border: none;
+}
+.bases-toolbox-del-open:hover { background: var(--interactive-accent-hover); }
+.bases-toolbox-del-path code { word-break: break-all; }
+.bases-toolbox-del-preview {
+  max-height: 220px;
+  overflow: auto;
+  background: var(--background-secondary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-s);
+  padding: var(--size-2-3);
+  font-size: var(--font-ui-smaller);
+  white-space: pre;
+}
+
+/* Property Index — responsive header icons.
+   The list is a size-query container; low-priority icons (bt-extra) collapse
+   into the ⋯ overflow (bt-more) when the panel is narrow, and all show in the
+   wide main-tab popout. The name truncates so icons never get pushed off. */
+.bases-toolbox-index-list { container-type: inline-size; }
+.bases-toolbox-index-prop-name { min-width: 0; }
+.bases-toolbox-index-prop-header .bases-toolbox-index-btn { flex: 0 0 auto; }
+.bases-toolbox-index-prop-header .bt-extra { display: none; }
+.bases-toolbox-index-prop-header .bt-more { display: inline-flex; }
+@container (min-width: 460px) {
+  .bases-toolbox-index-prop-header .bt-extra { display: inline-flex; }
+  .bases-toolbox-index-prop-header .bt-more { display: none; }
+}
+
+/* Property Index — leading property-type icon */
+.bases-toolbox-index-type-icon {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  color: var(--text-muted);
+}
+.bases-toolbox-index-type-icon svg {
+  width: var(--icon-s, 16px);
+  height: var(--icon-s, 16px);
+}
+
+/* Pinned allowed-values audit — flush-left property group header */
+.bases-toolbox-audit-group {
+  display: flex;
+  align-items: center;
+  gap: var(--size-2-2);
+  margin: var(--size-4-3) 0 var(--size-2-1);
+  font-weight: var(--font-semibold);
+  color: var(--text-normal);
+}
+.bases-toolbox-audit-group-icon {
+  display: inline-flex;
+  color: var(--text-muted);
+}
+.bases-toolbox-audit-group-icon svg {
+  width: var(--icon-s, 16px);
+  height: var(--icon-s, 16px);
+}
+
+/* Pinned allowed-values audit — section headings (flush, like the group rows) */
+.bases-toolbox-audit-section {
+  font-weight: var(--font-semibold);
+  color: var(--text-normal);
+  margin: var(--size-4-4) 0 var(--size-2-2);
+  padding-bottom: var(--size-2-1);
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+.bases-toolbox-audit-section:first-child { margin-top: 0; }
+
+/* Format doctor — persistent per-row Ignore */
+.bases-toolbox-doctor-ignore {
+  margin-left: auto;
+  padding: 2px 8px;
+  font-size: var(--font-ui-smaller);
+  color: var(--text-muted);
+  background: transparent;
+  box-shadow: none;
+}
+.bases-toolbox-doctor-ignore:hover {
+  color: var(--text-normal);
+  background: var(--background-modifier-hover);
+}
+.bases-toolbox-doctor-row-ignored {
+  opacity: 0.55;
+}
+
+/* Format doctor — top tabs (To fix / Ignored) */
+.bases-toolbox-doctor-tabs {
+  display: flex;
+  gap: var(--size-2-3);
+  border-bottom: 1px solid var(--background-modifier-border);
+  margin-bottom: var(--size-4-2);
+}
+.bases-toolbox-doctor-tab {
+  padding: var(--size-2-2) var(--size-4-1);
+  cursor: pointer;
+  color: var(--text-muted);
+  border-bottom: 2px solid transparent;
+  font-size: var(--font-ui-small);
+  font-weight: var(--font-medium);
+}
+.bases-toolbox-doctor-tab:hover { color: var(--text-normal); }
+.bases-toolbox-doctor-tab.is-active {
+  color: var(--text-normal);
+  border-bottom-color: var(--interactive-accent);
+}
+
+/* Find & replace — one control per row */
+.bases-toolbox-fr-controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-2-3);
+  margin-bottom: var(--size-4-2);
+}
+.bases-toolbox-fr-ctl-row {
+  display: flex;
+  align-items: center;
+  gap: var(--size-2-3);
+}
+.bases-toolbox-fr-ctl-row select,
+.bases-toolbox-fr-ctl-row input[type="text"] { flex: 1; }
+.bases-toolbox-fr-ctl-label {
+  min-width: 84px;
+  color: var(--text-muted);
+  font-size: var(--font-ui-small);
+}
+.bases-toolbox-fr-ctl-labelrow {
+  margin-top: var(--size-2-1);
+  color: var(--text-normal);
+  font-weight: var(--font-medium);
+}
+
+/* Empty-replacement destructive warning (red + icon); tempered when filled */
+.bases-toolbox-fr-clearwarn {
+  color: var(--text-error);
+  display: flex;
+  align-items: center;
+  gap: var(--size-2-1);
+}
+.bases-toolbox-fr-warn-icon { display: inline-flex; }
+.bases-toolbox-fr-warn-icon svg { width: var(--icon-s, 16px); height: var(--icon-s, 16px); }
+
+/* "N files will change" summary — bigger, tucked close to the list divider */
+.bases-toolbox-frv-bar.bases-toolbox-fr-summary-bar { margin-bottom: var(--size-2-1); }
+.bases-toolbox-fr-summary {
+  font-size: var(--font-ui-large);
+  font-weight: var(--font-semibold);
+}
+
+/* Bases Toolbox launcher (left-sidebar "launch anything" panel) */
+.bases-toolbox-launcher { padding: var(--size-4-2); }
+.bases-toolbox-launcher-intro {
+  color: var(--text-muted);
+  font-size: var(--font-ui-small);
+  margin-bottom: var(--size-2-2);
+}
+.bases-toolbox-launcher-search {
+  width: 100%;
+  margin-bottom: var(--size-4-2);
+}
+.bases-toolbox-launcher-section {
+  font-weight: var(--font-semibold);
+  color: var(--text-normal);
+  margin: var(--size-4-3) 0 var(--size-2-1);
+}
+.bases-toolbox-launcher-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--size-2-1) var(--size-2-3);
+  padding: var(--size-2-3) 0;
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+.bases-toolbox-launcher-star {
+  grid-column: 3;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  color: var(--text-faint);
+}
+.bases-toolbox-launcher-star:hover {
+  color: var(--text-muted);
+}
+.bases-toolbox-launcher-star.is-fav {
+  color: var(--color-yellow);
+}
+.bases-toolbox-launcher-star.is-fav .svg-icon {
+  fill: var(--color-yellow);
+}
+.bases-toolbox-launcher-hint {
+  font-size: var(--font-ui-smaller);
+  color: var(--text-faint);
+  margin-bottom: var(--size-2-1);
+}
+.bases-toolbox-fav-card {
+  cursor: grab;
+}
+.bases-toolbox-fav-card.is-dragging {
+  opacity: 0.5;
+}
+.bases-toolbox-fav-card.is-drop-target {
+  border-top: 2px solid var(--interactive-accent);
+}
+.bases-toolbox-suggest-path {
+  color: var(--text-faint);
+  font-size: var(--font-ui-smaller);
+}
+.bases-toolbox-launcher-icon {
+  grid-column: 1;
+  display: inline-flex;
+  color: var(--text-muted);
+}
+.bases-toolbox-launcher-text { grid-column: 2; min-width: 0; }
+.bases-toolbox-launcher-name {
+  font-weight: var(--font-medium);
+  font-size: var(--font-ui-small);
+}
+.bases-toolbox-launcher-desc {
+  color: var(--text-muted);
+  font-size: var(--font-ui-smaller);
+}
+.bases-toolbox-launcher-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: var(--size-2-2);
+  flex-wrap: wrap;
+  margin-top: var(--size-2-1);
+}
+.bases-toolbox-launcher-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--size-2-1);
+  padding: 2px 10px;
+  font-size: var(--font-ui-smaller);
+}
+/* Read-only bases: disable editing in the row body while keeping links and the
+   date-picker clickable. Scoped to base views the plugin marked read-only (the
+   community CSS-snippet approach, applied per base). If Bases renames these
+   table classes in a future version, update them alongside conditional-format's
+   selectors — they share the same base-table DOM. */
+.bases-toolbox-readonly .bases-tbody {
+  pointer-events: none;
+}
+.bases-toolbox-readonly .bases-tbody
+  :is(.mod-date + .clickable-icon, .internal-link, .external-link) {
+  pointer-events: auto;
+}
+/* Optional (separate setting): also hide the toolbar "New" button so rows can't
+   be added on a read-only base. */
+.bases-toolbox-readonly-nonew .bases-toolbar-new-item-menu {
+  display: none;
+}
+
+/* Aliased-link audit. */
+.bases-toolbox-alias-modal { width: min(760px, 90vw); }
+.bases-toolbox-alias-group {
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-m);
+  padding: var(--size-2-3) var(--size-4-2);
+  margin: var(--size-2-3) 0;
+}
+.bases-toolbox-alias-head {
+  display: flex;
+  align-items: center;
+  gap: var(--size-2-2);
+  margin-bottom: var(--size-2-2);
+}
+.bases-toolbox-alias-warn { display: inline-flex; color: var(--text-warning); }
+.bases-toolbox-alias-warn svg { width: 15px; height: 15px; }
+.bases-toolbox-alias-target { font-weight: var(--font-semibold); font-family: var(--font-monospace); }
+.bases-toolbox-alias-form {
+  padding: var(--size-2-1) 0 var(--size-2-1) var(--size-4-2);
+  border-top: 1px solid var(--background-modifier-border);
+}
+.bases-toolbox-alias-formname { font-size: var(--font-ui-small); }
+.bases-toolbox-alias-occs { display: flex; flex-direction: column; padding-left: var(--size-4-3); }
+
+/* CSV importer: restore-unfinished-import bar. */
+.bases-toolbox-import-restore {
+  display: flex;
+  align-items: center;
+  gap: var(--size-2-2);
+  flex-wrap: wrap;
+  padding: var(--size-2-3) var(--size-4-2);
+  margin-bottom: var(--size-4-2);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-m);
+  background: var(--background-secondary);
+  font-size: var(--font-ui-small);
+}
+
+/* CSV importer: bulk type controls + import progress bar. */
+.bases-toolbox-csv-bulk {
+  display: flex;
+  align-items: center;
+  gap: var(--size-2-2);
+  margin-bottom: var(--size-2-2);
+  font-size: var(--font-ui-small);
+}
+.bases-toolbox-csv-progress {
+  width: 100%;
+  margin-top: var(--size-2-2);
+}
+/* Icon dropdown for choosing a property type (native <option> can't hold SVGs). */
+.bases-toolbox-csv-type {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--size-2-1);
+  padding: 2px var(--size-2-2);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-s);
+  background: var(--background-modifier-form-field);
+  cursor: pointer;
+  font-size: var(--font-ui-small);
+  white-space: nowrap;
+}
+.bases-toolbox-csv-type:hover { border-color: var(--interactive-accent); }
+.bases-toolbox-csv-type-icon,
+.bases-toolbox-csv-type-chev { display: inline-flex; color: var(--text-muted); }
+.bases-toolbox-csv-type-icon svg { width: 15px; height: 15px; }
+.bases-toolbox-csv-type-chev svg { width: 13px; height: 13px; }
+.bases-toolbox-csv-type-label { text-transform: capitalize; }
+/* Notice action button: sits on its own line, flush left, with clear breathing
+   room above it separating it from the message text. (Notification styling
+   convention for this plugin — buttons are a distinct block, not inline with
+   the sentence.) */
+.bases-toolbox-notice-btn {
+  display: block;
+  margin-top: var(--size-4-4);
+  margin-left: 0;
+}
+
+/* Formula expression inputs: monospace + roomy, they hold code. */
+.bases-toolbox-formula-expr {
+  font-family: var(--font-monospace);
+  min-width: 16em;
+}
+/* Embedded CodeMirror formula editor (Obsidian's own formula language). Style it
+   to read like a single-line input inside the Setting control. */
+.bases-toolbox-formula-cm.cm-editor {
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-s);
+  background: var(--background-modifier-form-field);
+  min-width: 18em;
+  max-width: 28em;
+  font-size: var(--font-ui-small);
+}
+.bases-toolbox-formula-cm.cm-editor.cm-focused {
+  border-color: var(--interactive-accent);
+  box-shadow: 0 0 0 1px var(--interactive-accent);
+  outline: none;
+}
+.bases-toolbox-formula-cm .cm-content {
+  padding: 4px 6px;
+  font-family: var(--font-monospace);
+}
+.bases-toolbox-formula-cm .cm-scroller { overflow-x: auto; }
+.bases-toolbox-launcher-btn-icon { display: inline-flex; }
+.bases-toolbox-launcher-btn-icon svg { width: 14px; height: 14px; }
+
+/* Bases filter popover: keep it on-screen. The native menu is positioned with a
+   fixed `left` and grows to fit its content, so a long filter value (or zoom
+   >100%) pushes its right edge off the viewport. Cap the width to the viewport
+   and let the filter rows wrap + their inputs shrink instead of forcing the box
+   wider. Scoped to the filter menu so it can't affect other Bases menus. */
+.bases-toolbar-filter-menu {
+  max-width: min(96vw, 640px);
+  box-sizing: border-box;
+  overflow-x: auto;
+}
+.bases-toolbar-filter-menu .filter-row {
+  flex-wrap: wrap;
+}
+/* min-width:0 overrides the flex default (min-width:auto) that stops a text
+   input from shrinking below its content width — the real cause of overflow. */
+.bases-toolbar-filter-menu .filter-row > * {
+  min-width: 0;
+}
+
+/* CSV importer — row picker (choose exactly which rows import). */
+.bases-toolbox-csv-rows {
+  margin: var(--size-4-2) 0;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-m);
+  padding: var(--size-4-1) var(--size-4-2);
+}
+.bases-toolbox-csv-rows-summary {
+  cursor: pointer;
+  font-weight: var(--font-semibold);
+}
+.bases-toolbox-csv-rows-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--size-2-3);
+  margin: var(--size-4-1) 0;
+  flex-wrap: wrap;
+}
+.bases-toolbox-csv-rows-bar input[type="search"] {
+  flex: 1;
+  min-width: 10em;
+}
+.bases-toolbox-csv-rowlist {
+  max-height: 320px;
+  overflow-y: auto;
+  border-top: 1px solid var(--background-modifier-border);
+}
+.bases-toolbox-csv-rowline {
+  display: flex;
+  align-items: center;
+  gap: var(--size-2-3);
+  padding: 2px 0;
+  border-bottom: 1px solid var(--background-modifier-border-hover);
+  font-size: var(--font-ui-small);
+}
+.bases-toolbox-csv-rowline:last-child {
+  border-bottom: none;
+}
+.bases-toolbox-csv-rowname {
+  font-weight: var(--font-semibold);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 14em;
+}
+.bases-toolbox-csv-rowcells {
+  flex: 1;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.bases-toolbox-csv-rowchip {
+  font-size: var(--font-ui-smaller);
+  border-radius: var(--radius-s);
+  padding: 0 6px;
+  white-space: nowrap;
+}
+.bases-toolbox-csv-rowchip.is-new {
+  color: var(--text-success);
+  background: var(--background-modifier-success);
+}
+.bases-toolbox-csv-rowchip.is-existing {
+  color: var(--text-warning);
+  background: var(--background-modifier-error-hover);
+}
+
+/* Duplicate finder — collapsible scan options. */
+.bases-toolbox-dup-options {
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-m);
+  padding: var(--size-4-1) var(--size-4-2);
+  margin-bottom: var(--size-4-2);
+}
+.bases-toolbox-dup-options > summary {
+  cursor: pointer;
+  font-weight: var(--font-semibold);
+}
+
+/* Duplicate finder — per-member merge checkbox. */
+.bases-toolbox-dup-mergecb {
+  margin: 0;
+}
+
+/* Duplicate finder — bulk merge across visible groups. */
+.bases-toolbox-dup-bulk {
+  margin: var(--size-4-2) 0;
+}
+
+/* Duplicate finder — body diff. */
+.bases-toolbox-dup-diff {
+  margin-top: var(--size-4-1);
+}
+.bases-toolbox-dup-diff > summary {
+  cursor: pointer;
+  font-size: var(--font-ui-small);
+  color: var(--text-muted);
+}
+.bases-toolbox-dup-difflines {
+  font-family: var(--font-monospace);
+  font-size: var(--font-ui-smaller);
+  max-height: 260px;
+  overflow: auto;
+  border: 1px solid var(--background-modifier-border);
+  border-radius: var(--radius-s);
+  margin-top: var(--size-2-2);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.bases-toolbox-dup-diffline {
+  padding: 0 var(--size-2-2);
+}
+.bases-toolbox-dup-diffline.bt-diff-del {
+  background: var(--background-modifier-error-hover);
+  color: var(--text-error);
+}
+.bases-toolbox-dup-diffline.bt-diff-add {
+  background: var(--background-modifier-success);
+  color: var(--text-success);
+}
+.bases-toolbox-dup-diffgap {
+  padding: 0 var(--size-2-2);
+  color: var(--text-faint);
+  font-style: italic;
+}
+
+/* Trashed-note list in the merge preview — one full path per line. */
+.bases-toolbox-dup-pv-trashline {
+  font-family: var(--font-monospace);
+  font-size: var(--font-ui-smaller);
+  overflow-wrap: anywhere;
+  padding-left: var(--size-4-2);
+}
+
+/* Per-source detail lines under the origin label in the preview table. */
+.bases-toolbox-dup-pv-row .bt-pv-detail {
+  color: var(--text-muted);
+  overflow-wrap: anywhere;
+}
+
+/* Importer — collapsible template help (rules + worked example). */
+.bases-toolbox-csv-tpl-help {
+  margin: calc(-1 * var(--size-4-1)) 0 var(--size-4-2);
+}
+.bases-toolbox-csv-tpl-help > summary {
+  cursor: pointer;
+  font-size: var(--font-ui-small);
+  color: var(--text-muted);
+}
+
+/* Duplicate finder — the two merge actions side by side. */
+.bases-toolbox-dup-btnrow {
+  display: flex;
+  gap: var(--size-2-3);
+  flex-wrap: wrap;
+  margin-top: var(--size-2-2);
+}

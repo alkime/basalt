@@ -1,0 +1,31 @@
+{
+  "settings": {
+    "blockArrowAndWheel": true,
+    "digitsOnlyTyping": true,
+    "historyCap": null,
+    "multilineListCells": false,
+    "multilineTipShown": false,
+    "cfEnabled": true,
+    "companionsFolder": "",
+    "companionExts": "",
+    "companionExcludeExts": "base",
+    "companionVaultWide": false,
+    "companionFolders": "",
+    "companionAuto": false,
+    "dupIncludeFolders": [],
+    "dupExcludeFolders": [],
+    "dupSkipDateLikeNames": true,
+    "dupKeepPolicy": "none",
+    "companionBaseExclusionApplied": true,
+    "favoriteFeatures": [
+      "cmd:new-note-with-properties"
+    ],
+    "newNoteMinRows": 5,
+    "readOnlyAllBases": false,
+    "readOnlyBlockNewRow": false,
+    "literalEnter": false,
+    "stashpadLinks": false,
+    "skipExtensions": "edtz",
+    "importPresets": []
+  }
+}
