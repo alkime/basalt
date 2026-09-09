@@ -12,7 +12,7 @@
 body {
   /* Tint strength: accent saturation, kept in a range that stays readable.
      Raise the clamp bounds for louder chrome, lower them for subtler. */
-  --peacock-s: clamp(20%, var(--accent-s), 45%);
+  --peacock-s: clamp(15%, var(--accent-s), 35%);
 }
 
 .theme-light {
