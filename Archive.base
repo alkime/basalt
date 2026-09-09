@@ -1,0 +1,64 @@
+filters:
+  and:
+    - file.folder == "Tasks/Archive"
+properties:
+  file.name:
+    displayName: Task
+  note.status:
+    displayName: Status
+  note.project:
+    displayName: Project
+  note.tags:
+    displayName: Tags
+  note.owner:
+    displayName: Owner
+  note.due:
+    displayName: Due
+  file.mtime:
+    displayName: Modified
+views:
+  - type: table
+    name: All
+    order:
+      - file.name
+      - status
+      - project
+      - tags
+      - owner
+      - due
+      - file.mtime
+    sort:
+      - property: file.mtime
+        direction: DESC
+    columnSize:
+      file.name: 360
+  - type: table
+    name: By Project
+    groupBy:
+      property: project
+      direction: ASC
+    order:
+      - file.name
+      - status
+      - owner
+      - file.mtime
+    sort:
+      - property: file.mtime
+        direction: DESC
+    columnSize:
+      file.name: 360
+  - type: table
+    name: Project Tasks
+    filters:
+      and:
+        - project == this.file.asLink()
+    order:
+      - file.name
+      - status
+      - owner
+      - file.mtime
+    sort:
+      - property: file.mtime
+        direction: DESC
+    columnSize:
+      file.name: 360
