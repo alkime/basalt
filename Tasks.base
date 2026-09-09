@@ -129,7 +129,7 @@ views:
     name: Project Tasks
     filters:
       and:
-        - if(project, project.asFile().path == this.file.path, false)
+        - project == this.file.asLink()
     order:
       - file.name
       - status

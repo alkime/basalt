@@ -46,7 +46,7 @@ No `gh`? See below.
 - **Task statuses:** `Backlog`, `Up Next`, `In progress`, `Done`, `Cancelled`. The kanban columns and dashboard views key off these exact strings.
 - **Project statuses:** `Not started`, `In progress`, `Ongoing`, `Done`.
 - Tag a task `#bug` (or `tags: [bug]`) and it appears in the dashboard's Bugs section.
-- Each project note embeds `Tasks.base#Project Tasks`, which filters to tasks whose `project` link resolves to that note.
+- Each project note embeds `Tasks.base#Project Tasks`, which filters to tasks whose `project` link resolves to that note. Hitting **+ New** in that embedded view creates the task with its `project` property already pointing at the project you're in.
 - Drag cards between kanban columns to change a task's status; use the board's **+** to quick-add a task into a column.
 
 > [!note]
