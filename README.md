@@ -56,6 +56,7 @@ No `gh`? See below.
 
 - **Statuses:** rename them in task frontmatter *and* in the `Tasks.base` view filters/`columnOrders` — the strings must match exactly.
 - **New views:** add them in the Bases UI or by editing the `.base` YAML; embed any view in a note with `![[Tasks.base#View Name]]`.
+- **Vault color:** the bundled `peacock.css` snippet extends your accent color (Settings → Appearance → Accent color) onto the window chrome — Peacock-style — so each vault built from this template is recognizable at a glance. Pick a different accent per vault; delete the snippet if you'd rather keep stock chrome.
 - **Banners & icons:** the Banners and Iconic plugins are included. Give any note a cover image with `banner: "![[Attachments/your-image.jpg]]"` frontmatter (renders in reading view), and set per-file icons via Iconic. Add `obsidianUIMode: preview` to make a note always open in reading view.
 - **Dates:** type `@` for natural-language dates (`@tomorrow` → `2026-09-09`).
 

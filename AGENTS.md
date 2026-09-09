@@ -45,4 +45,5 @@ Unless the vault owner has enabled Obsidian Sync or git history of their own, ed
 - `plugins/<id>/data.json` — per-plugin settings.
 - `types.json` — explicit property types (`due` is `date`).
 - `snippets/wide-embeds.css` — full-width embeds for notes with `cssclasses: [wide-embeds]` (the dashboard uses this).
+- `snippets/peacock.css` — Peacock-style vault identification: extends the per-vault accent color (`appearance.json` → `accentColor`, exposed as `--accent-h/s/l`) onto the window chrome (title bar, tab bar, ribbon, status bar). The snippet is identical across vaults; only each vault's accent color differs, so never hard-code a color into it.
 - `app.json`, `appearance.json`, `templates.json`, `bookmarks.json` — app settings; change only when asked.

@@ -1,0 +1,35 @@
+/* peacock.css — Peacock-style vault identification.
+
+   Extends the per-vault accent color (Settings → Appearance → Accent color)
+   onto the window chrome — title bar, tab bar, ribbon, status bar — so each
+   vault window is recognizable at a glance.
+
+   Obsidian exposes the accent as --accent-h/s/l CSS variables, and the
+   default theme paints the chrome through the background variables
+   overridden below, so this snippet is theme-driven: change the accent
+   color and the whole window follows. No per-vault edits needed here. */
+
+body {
+  /* Tint strength: accent saturation, kept in a range that stays readable.
+     Raise the clamp bounds for louder chrome, lower them for subtler. */
+  --peacock-s: clamp(20%, var(--accent-s), 45%);
+}
+
+.theme-light {
+  --peacock-chrome: hsl(var(--accent-h), var(--peacock-s), 84%);
+  --peacock-chrome-unfocused: hsl(var(--accent-h), calc(var(--peacock-s) / 2), 90%);
+}
+
+.theme-dark {
+  --peacock-chrome: hsl(var(--accent-h), var(--peacock-s), 16%);
+  --peacock-chrome-unfocused: hsl(var(--accent-h), calc(var(--peacock-s) / 2), 12%);
+}
+
+body {
+  --titlebar-background: var(--peacock-chrome-unfocused);
+  --titlebar-background-focused: var(--peacock-chrome);
+  --tab-container-background: var(--peacock-chrome);
+  --ribbon-background: var(--peacock-chrome);
+  --ribbon-background-collapsed: var(--peacock-chrome);
+  --status-bar-background: var(--peacock-chrome);
+}
