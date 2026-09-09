@@ -63,6 +63,7 @@ views:
         - status == "Up Next"
         - status == "In progress"
         - status == "Done"
+        - status == "Finished"
     order:
       - project
     groupByProperty: note.status
@@ -73,6 +74,7 @@ views:
         - Up Next
         - In progress
         - Done
+        - Finished
     cardOrders:
       note.status: {}
     columnColors:
