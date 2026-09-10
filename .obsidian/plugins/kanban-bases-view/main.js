@@ -3174,7 +3174,12 @@ var KanbanView = class extends import_obsidian5.BasesView {
       }
       const swimlanePropertyId = this.swimlaneByPropertyId && this.swimlaneByPropertyId !== this.groupByPropertyId ? this.swimlaneByPropertyId : null;
       const groupChanged = this.groupByPropertyId !== this._prefsPropertyId;
-      if (groupChanged || swimlanePropertyId !== this._prefsSwimlanePropertyId) {
+      // PATCHED (vault-hq): also reload prefs when the view config changes, so two
+      // kanban views grouping by the same property don't leak column order into
+      // each other when switching views in the same tab.
+      const configChanged = this.config !== this._prefsConfig;
+      if (groupChanged || configChanged || swimlanePropertyId !== this._prefsSwimlanePropertyId) {
+        this._prefsConfig = this.config;
         this._loadPrefs(this.groupByPropertyId, swimlanePropertyId);
       }
       const hasNoEntries = entries.length === 0;

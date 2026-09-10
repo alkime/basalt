@@ -46,6 +46,7 @@ Unless the vault owner has enabled Obsidian Sync or git history of their own, ed
 
 - `workspace.json` — UI state, rewritten constantly by the app. Never hand-edit; it is gitignored.
 - `core-plugins.json`, `community-plugins.json` — which plugins are enabled. Community plugin builds are vendored in `.obsidian/plugins/` so the template works on first launch.
+- `plugins/kanban-bases-view/main.js` carries a local patch (marked with a `PATCHED (vault-hq)` comment) that reloads column-order preferences when the view config changes, fixing column-order leakage between two kanban views grouped by the same property. Re-apply it if upgrading the plugin, or drop it once fixed upstream.
 - `plugins/<id>/data.json` — per-plugin settings.
 - `types.json` — explicit property types (`due` is `date`).
 - `snippets/wide-embeds.css` — full-width embeds for notes with `cssclasses: [wide-embeds]` (the dashboard uses this).
