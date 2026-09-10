@@ -39,8 +39,6 @@ views:
     name: Board
     filters:
       and:
-        - status != "Done"
-        - status != "Finished"
         - status != "Cancelled"
     order:
       - project
@@ -49,9 +47,11 @@ views:
     cardTitleProperty: file.name
     columnOrders:
       note.status:
+        - Backlog
         - Up Next
         - In progress
-        - Backlog
+        - Done
+        - Finished
     cardOrders:
       note.status: {}
     columnColors:
